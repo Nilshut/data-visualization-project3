@@ -4,8 +4,8 @@
 
 ---
 
-We build a visualization tool with d3 for exploring connections from scientist in the DFG (Deutsche 
-Forschungsgemeinschaft) data including multiple filtering options for the user.  
+We built a visualization tool with [`d3`](https://github.com/d3/d3) for exploring connections between scientists in the DFG (Deutsche 
+Forschungsgemeinschaft) data including multiple filtering options.  
 
 ## Table of contents:
 
@@ -30,7 +30,7 @@ be seen in a CV or heard in an interview or talk - we visualise networks.
 
 #### Domain problem characterization
 
-Our group of target users consists of anyone with an interest in the relationships between various DFG researchers.
+Our taget group consists of anyone with an interest in the relationships between various DFG researchers.
 As mentioned above, this applies mostly to universities and professors looking to fill a vacancy or evaluate possible
 collaborations respectively. But pre- and post-graduates as well as the DFG itself can profit from utilising this visualisation
 to aid their decision-making process. These relations can be evaluated from different angles, such as the number and depth
@@ -40,13 +40,14 @@ reasonably be stored in a person's memory for evaluation.
 
 #### Data / task abstraction
 
-We used the java script library d3 (https://github.com/d3/d3) to create a dynamic, interactive data visualization. Our starting point were the gepris dfg data from which we derived the data for our visualization. Following ypu can see the ER model of our data:
+We used the JavaScript library [`d3`](https://github.com/d3/d3) to create a dynamic, interactive data visualization. We based our data model on the Gepris DFG data. The following figure shows the data model in an ER diagram:
 
 ![](pics/data_er.png)
 
-We have splitted the data in three tables. One table contains all the data we need for the filtering process (filtered_data.csv). For the filtering we are using the crossfilter2 library (https://github.com/crossfilter/crossfilter) which enables fast filtering over different filter dimensions. The filter process returns a list of projects, which satisfy the selected filter options. We use the second table (filtered_persons_projects.csv) which contains the connection between the projects and the people and the list of projects to get the information who worked in the selected projects. Furthermore we calculate links between the persons. We create links between persons who work together in a project and if they work together in multiple projects we account this. \
-Now we are ready for the network visualization: we draw a force directed graph with d3. The nodes represent the person and the links are the calculated connections between them. We enrich the node data with the third table (nodes.csv) including the person names and their institutions. \
-The user can interact with the visualization in many different ways. For example he can zoom into the network, select a node by hovering over it and see additional information to the person on the a sidebar. Also he can grab a node and change his position. To learn more about the different interaction possibilities see the [ Manual ](#manual). Note that we do not aim to analyse our data but instead to aid analysis through visualisation.    
+We have split the data into three tables. The first of which contains all persons and their institutions (nodes.csv). The second table contains all projects ans is used for filtering (filtered_data.csv). To filter we use the [`crossfilter2`](https://github.com/crossfilter/crossfilter) library which enables fast filtering across different filter dimensions. The result of filtering is a list of projects, which satisfy the selected filter criteria. \
+The last table (filtered_persons_projects.csv) contains information on which people collaborated on which projects. Based on this we calculate links between persons. All persons working on one project together are linked and will therefore be refpresented as a link in the visualized data. If people worked together on multiple projects, the weight of the links is increased.\
+Now we are ready for the network visualization: we draw a force directed graph with `d3`. The nodes represent the persons from the first table and the links are the calculated connections between them. \
+Users can interact with the visualization in many different ways. They can zoom into the network, select a node by hovering over it and see additional information about the person and the projects they worked on in the sidebar. They can grab a node and change its position. They can filter all data in the graph by either selecting an institution, a person or a subject or selecting ranges of years or duration from the bar charts. To learn more about the different interaction possibilities see the [ Manual ](#manual). Note that we do not aim to analyse our data but instead to aid analysis through visualisation.    
 
 #### Visual encoding / interaction design:
 As we aim to visualise potentially very complex relations between people, a network presented itself as the best option.
