@@ -47,7 +47,7 @@ We used the JavaScript library [`d3`](https://github.com/d3/d3) to create a dyna
 We have split the data into three tables. The first of which contains all persons and their institutions (nodes.csv). The second table contains all projects ans is used for filtering (filtered_data.csv). To filter we use the [`crossfilter2`](https://github.com/crossfilter/crossfilter) library which enables fast filtering across different filter dimensions. The result of filtering is a list of projects, which satisfy the selected filter criteria. \
 The last table (filtered_persons_projects.csv) contains information on which people collaborated on which projects. Based on this we calculate links between persons. All persons working on one project together are linked and will therefore be refpresented as a link in the visualized data. If people worked together on multiple projects, the weight of the links is increased.\
 Now we are ready for the network visualization: we draw a force directed graph with `d3`. The nodes represent the persons from the first table and the links are the calculated connections between them. \
-Users can interact with the visualization in many different ways. They can zoom into the network, select a node by hovering over it and see additional information about the person and the projects they worked on in the sidebar. They can grab a node and change its position. They can filter all data in the graph by either selecting an institution, a person or a subject or selecting ranges of years or duration from the bar charts. To learn more about the different interaction possibilities see the [ Manual ](#manual). Note that we do not aim to analyse our data but instead to aid analysis through visualisation.    
+Users can interact with the visualization in many different ways. They can zoom into the network, select a node by hovering over it and see additional information about the person and the projects they worked on in the sidebar. They can grab a node and change its position. They can filter all data in the graph by either selecting an institution, a person or a academic field or selecting ranges of years or duration from the bar charts. To learn more about the different interaction possibilities see the [ Manual ](#manual). Note that we do not aim to analyse our data but instead to aid analysis through visualisation.    
 
 #### Visual encoding / interaction design:
 As we aim to visualise potentially very complex relations between people, a network presented itself as the best option.
@@ -70,7 +70,7 @@ Based on our validation, the threats mentioned in Munzner's 2009 paper were avoi
 <a name="install"></a>
 ## Installation
 
-1. In folder "/d3" install dependencies with command: `npm i`
+1. In directory "/d3" install dependencies with command: `npm i`
 2. Start server with `npx http-server .`
 3. Open http://localhost:8080/ in browser (default port)
 
@@ -81,25 +81,25 @@ The visualization tool is structured in two main areas: the filtering and the ex
 
 __1. filtering area:__
 
-In the filter area there are filter options in five different dimensions: "Project start year", "Duration (in years)", "Institution", "Academic field" and "Person".
+In the filtering area there are filter options for five different dimensions: "Project start year", "Duration (in years)", "Institution", "Academic field" and "Person".
 
 ![](pics/filter_area.png)
 
-For filtering the dimensions "Project start year" and "Duration (in years)" you have to select an interval in the bar charts. The dimensions "Institution", "Academic field" and "Person" can be filtered by the text fields which support autocompletion and drop down features. Deselection is possible by clicking onto a bar chart or removing the text by the text fields. The filter (bar charts and autocomplition) adjust and show only the data which match to the selected filter. Here you can see an example filter and the resulting bar charts:      
+For filtering the dimensions "Project start year" and "Duration (in years)" you can select a range in the bar charts. The dimensions "Institution", "Academic field" and "Person" can be filtered by entering text or selecting options of the according dropdowns. Deselection is possible by clicking onto a bar chart and removing the text from the drowdowns. The data visualized in the filters (bar charts and dropdowns) is reduced to the data matching only the current filter selection. Here you can see an example filter and the resulting bar charts:      
 
 ![](pics/filter_example.png)
 
 __2. exploring area:__
 
-In the exploring area the network graph will be shown if the selected filter data include less than 1000 persons (due to performance reasons). If more than the required persons are selected you will see the following message:  
+In the exploring area the network graph will be shown if the selected filter data includes less than 1000 persons. This is due to performance and usability reasons. If more than the required persons are selected you will see the following message:  
 
 ![](pics/too_much_data.png)
 
-If in the filtered data are less than 1000 persons the network graph for the specific filter will be shown. Here you can see an example graph for all persons who worked in projects of the "Freie Universität Berlin":
+If the filtered data contains less than 1000 persons the network graph for the specific filter will be shown. Here you can see an example graph for all persons who worked in projects of the "Freie Universität Berlin":
 
 ![](pics/explore_area.png)
 
-Every node represent one person and the links between nodes will be drawn if persons worked together in a project. The width of the links encode the amount of projects they have worked together. The user can zoom into the graph and navigate via mouse. If he hovers over a node informations of this person will be displayed on the right side. This inforamtions includes the name of the person, the institution for which the person is working and a list of all projects the person worked in. The informations for a project includes the project name, the start and end year, if present the subject area and all institutions which where involve to this project.     
+Every node represents one person and the links between nodes will be drawn if persons worked together in a project. The width of the links represents the amount of projects they have worked on together - the more the thicker. Users can zoom into the graph and navigate by panning. If they hover over a node, the sidebar on the right will display detail information of this person. These information include the name of the person, the institution for which the person is working and a list of all projects the person worked on. The information for a project include its name and if available the start and end year as well as the academic field and all institutions that where involved in this project.     
 
 <a name="contributors"></a>
 ## Contributors
